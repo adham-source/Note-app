@@ -1,0 +1,22 @@
+extends ../../layouts/dashboard
+block content
+    .container 
+        .row.my-2.p-2
+            if(note)
+                .col-12.d-flex.justify-content-between.align-items-center.mb-3
+                    h2 Update note
+                    a(href=`/dashboard/notes/${note._id}`, class="btn btn-outline-secondary text-light ")
+                        i.fa-solid.fa-left-long
+                        sapn.mx-2 Go back 
+                .col-md-9.m-auto
+                    form(method="POST", action=`/dashboard/notes/edit/${note._id}?_method=PATCH`, class="bg-dark px-3 py-2 rounded needs-validation", novalidate)
+                        div.mb-3
+                            label(for="name") Title
+                            input(class="form-control has-validation", type="text", name="title", id="name", minlength="5", maxlength="100", value=`${note.title}`,placeholder="Write title...", required)/
+                            div.invalid-feedback This is required and min 5 letter.
+                        div.mb-3
+                            label(for="body") Description
+                            textarea(class="form-control has-validation", name="body", placeholder="Description...", minlength="10", maxlength="1000", id="body", cols="30", rows="10", required) #{note.body}
+                            div.invalid-feedback This is required and min 10 letter.
+                        div.text-end
+                            button(type="submit", class="btn btn-success") Update Note

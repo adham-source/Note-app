@@ -1,0 +1,18 @@
+extends ../../layouts/dashboard
+block content
+    .container 
+        .row.my-2.p-2
+            .col-12 
+                a(href="/dashboard/notes", class="btn btn-outline-secondary text-light")
+                    i.fa-solid.fa-left-long
+                    sapn.mx-2 Go back
+        .row.g-3
+            if(notes && notes.length > 0)
+                h3 All Search Results:
+                each note, index in notes
+                    a(href=`/dashboard/notes/${note._id}`, data-bs-theme="dark", class="col-lg-9 py-4 px-3 shadow bg-primary-subtle text-emphasis-primary rounded", title=`${note.body}`)
+                        h5.text-capitalize.font-monospace.m-0 #{index + 1} - #{note.title}
+                            b.text-decoration-underline
+            else 
+                h5 Sorry! Not found any notes.
+            

@@ -1,0 +1,12 @@
+extends ../layouts/dashboard
+block content
+    .container
+        .row.gx-2
+            .col-12
+                h2 Hey, #{name} 
+            .col-lg-2.col-md-4 
+                a(href="/dashboard/notes", class="card shadow-lg bg-dark text-light")
+                    .card-body.text-center 
+                        h5.card-title.m-0.fw-bold
+                            i.fa-solid.fa-file
+                            span.mx-2 Notes

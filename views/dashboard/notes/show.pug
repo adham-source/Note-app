@@ -1,0 +1,47 @@
+extends ../../layouts/dashboard
+block content
+    .container 
+        //- if(!success && message)
+        //-     .alert.alert-danger.mt-3(role='alert', data-bs-theme="dark")
+        //-         | #{message} 
+        //-         a.alert-link(href='/dashboard/notes') Back to your notes
+        if(note)
+            .row.my-2.p-2
+                .col-6
+                    nav.mt-2(aria-label='breadcrumb')
+                        ol.breadcrumb
+                            li.breadcrumb-item(data-bs-theme="dark")
+                                a.fw-bold(href='/dashboard/notes') All Notes
+                            li.breadcrumb-item.active.text-white(aria-current='page', data-bs-theme="dark") #{note.title}
+                .col-6.text-end 
+                    a(href=`/dashboard/notes/edit/${note._id}`, class="btn btn-info")
+                        i.fa-solid.fa-pencil 
+            .row.gx-3
+                .col-12.mb-2
+                    div(class="card border-dark sahdow bg-dark text-light")
+                        .card-body
+                            div.d-flex.justify-content-between.align-items-center.mb-2
+                                h3.card-title.fs-1 #{note.title}
+                                div.d-flex.flex-column.align-items-center.justify-content-center.rounded.p-2.shadow-lg.bg-secondary(style="min-width: 8rem; height: 10rem; margin-left: .5rem") 
+                                    b #{note.createdAt.getDate()}
+                                    b #{note.createdAt.toLocaleString('en-US', { month: 'long' })}
+                                    b #{note.createdAt.getFullYear()}
+                                    p #{note.createdAt.toLocaleTimeString()}
+                            p.card-text #{note.body}
+                        .card-footer.text-end 
+                            button.btn.btn-danger(type='button', data-bs-toggle='modal', data-bs-target='#deleteNoteModal') Delete
+                            //- Modal
+                            #deleteNoteModal.modal.fade(tabindex='-1', aria-labelledby='deleteNoteModalLabel', aria-hidden='true')
+                                .modal-dialog
+                                    .modal-content.bg-dark
+                                        .modal-header
+                                            h1#deleteNoteModalLabel.modal-title.fs-5 Are you sure?
+                                            div(data-bs-theme="dark")
+                                                button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                                        .modal-body.text-center
+                                            p.m-0 This will delete your note 
+                                                b.fw-bold.text-danger #{note.title} 
+                                        .modal-footer
+                                            button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
+                                            form(method="POST", action=`/dashboard/notes/${note._id}?_method=DELETE`) 
+                                                button.btn.btn-outline-danger(type='submit') Confirm

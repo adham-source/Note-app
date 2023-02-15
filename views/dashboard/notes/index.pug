@@ -1,0 +1,59 @@
+extends ../../layouts/dashboard
+block content
+    .container 
+        .row.my-2.p-2
+            .col-12 
+                a(href="/dashboard", class="btn btn-outline-secondary text-light")
+                    i.fa-solid.fa-left-long
+                    sapn.mx-2 Go back
+        .row.gx-3
+            if (notes && notes.length > 0)
+                .col-lg-9.my-2.mx-lg-auto 
+                    form.nav.col-12.col-md-auto.flex-fill.mb-3.mb-md-0.me-md-3.needs-validation(role="search", method="POST", action="/dashboard/notes/search", novalidate)
+                        input.form-control.form-control-lg.form-control-dark.text-bg-dark(type='search', name="search", placeholder='Search...', aria-label='Search' required)
+                        div.invalid-feedback(data-bs-theme="dark") This field is rquired! If you are search.
+                .col-12.mb-2.text-end 
+                    a(href="/dashboard/notes/add", class="btn btn-primary") + New Note 
+                each note in notes
+                    .col-lg-4.col-md-6.mb-2
+                        a(href=`/dashboard/notes/${note._id}`, class="card border sahdow bg-dark text-light", title=`Dispaly ${note.title}`)
+                            .card-body 
+                                h5.card-title.fs-4 
+                                    span.text-primary.fs-3 # 
+                                    | #{note.title.length <= 30 ?  note.title : `${note.title}...`}
+                                p.card-text.text-justify #{note.body.length <= 100 ?  note.body : `${note.body}...`}
+            else
+                .col
+                    h3 There are no notes
+                    h5 Let's start with your first note!
+                    a(href="/dashboard/notes/add", class="btn btn-outline-info btn-lg") Create one! 
+        if (notes && notes.length > 0)
+            //- Dummy pagination Refactory
+            nav(aria-label='Page navigation example')
+                ul.pagination.d-flex.justify-content-center.my-2
+                    if(Number(current) === 1)
+                        li.page-item.disabled
+                            a.page-link(href='#') Previous
+                    else 
+                        li.page-item
+                            a.page-link(href='/dashboard/notes') First
+                    - let i = (Number(current) >= 3 ? Number(current) - 2 : 1)
+                    if(i !== 1)
+                        li.page-item.disabled
+                            a.page-link(href='#') ...
+                    - for (; i <= Number(current + 1) && i <= Number(pages); i++)
+                        if(i === Number(current))
+                            li.page-item.disabled
+                                a.page-link(href=`#`) #{i}
+                        else
+                            li.page-item
+                                a.page-link(href=`/dashboard/notes/?page=${i}`) #{i}
+                    if(i === Number(current + 2) && i < Number(pages))
+                        li.page-item.disabled
+                            a.page-link(href='#') ...
+                    if(Number(current) === Number(pages))
+                        li.page-item.disabled
+                            a.page-link(href='#') Last
+                    else 
+                        li.page-item
+                            a.page-link(href=`/dashboard/notes/?page=${pages}`) Last

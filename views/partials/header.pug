@@ -1,0 +1,20 @@
+header.p-3.text-bg-dark.shadow-lg(id="header")
+    .container
+        .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
+            a.d-flex.align-items-center.mb-2.mb-lg-0.text-white.text-decoration-none(href='/')
+                img(src="/assets/images/logo.svg", alt="Notes", width='40', height='32', role='img')/
+                h2.mx-2.fw-bold.fs-2 Notes
+            ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+                li
+                    a.nav-link.px-2.text-secondary(href='/') Home
+                li
+                    a.nav-link.px-2.text-white(href='#') Features
+                li
+                    a.nav-link.px-2.text-white(href='#') FAQs
+                li
+                    a.nav-link.px-2.text-white(href='/about') About
+            form.col-12.col-lg-auto.mb-3.mb-lg-0.me-lg-3(role='search')
+                input.form-control.form-control-dark.text-bg-dark(type='search', placeholder='Search...', aria-label='Search')
+            .text-end
+                a.btn.btn-outline-light.me-2(href="/auth/google",type='button') Login
+                a.btn.btn-warning(href="/auth/google", type='button') Sign-up

@@ -1,0 +1,54 @@
+::placeholder {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-secondary-rgb),var(--bs-text-opacity)) !important;
+}
+
+body {
+    background-color: var(--bs-secondary-color);
+    color: var(--bs-light);
+    font-size: 1.2rem;
+    overflow-x: hidden;
+}
+
+main {
+    min-height: calc(100vh - 10.2rem);
+    padding: 2rem 0;
+}
+
+a {
+    text-decoration: none;
+    transition: all .3s linear;
+}
+
+a.card:hover {
+    background-color: var(--bs-light) !important;
+    color: var(--bs-dark) !important;
+}
+
+ul a:hover {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-secondary-rgb),var(--bs-text-opacity)) !important;
+}
+
+::-webkit-scrollbar {
+    max-width: .7rem;
+    background-color: var(--bs-secondary);
+    border-radius: 1rem;
+    transition: all .3s linear;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--bs-dark);
+    border-radius: 1rem;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: hsla(0, 0%, 15%, .9);
+}
+
+
+
+
+
+
